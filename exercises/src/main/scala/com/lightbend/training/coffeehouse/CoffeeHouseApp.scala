@@ -4,7 +4,7 @@
 
 package com.lightbend.training.coffeehouse
 
-import akka.actor.{ActorRef, ActorSystem}
+import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import akka.event.Logging
 
 import scala.annotation.tailrec
@@ -39,7 +39,14 @@ class CoffeeHouseApp(system: ActorSystem) extends Terminal {
   private val log = Logging(system, getClass.getName)
 
   private val coffeeHouse = createCoffeeHouse()
-  coffeeHouse ! "Brew Coffee"
+
+  system.actorOf(Props(new Actor {
+    coffeeHouse ! "Brew Coffee" // sender is implicit
+
+    override def receive: Receive = {
+      case msg => log.info(msg.toString)
+    }
+  }))
 
   def run(): Unit = {
     log.warning(f"{} running%nEnter "
