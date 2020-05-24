@@ -1,0 +1,237 @@
+{
+  "start-time" : "2020-05-24T18:42:22.900",
+  "akka-version" : "2.6.3",
+  "akka-diagnostics-version" : "1.1.12",
+  "classpath" : "/tmp/sbt_244ca1d7/job-1/target/9ad48cde/exercises_2.13-1.3.0.jar:/tmp/sbt_244ca1d7/target/062a1cdc/common_2.13-1.3.0.jar:/tmp/sbt_244ca1d7/target/1418c956/scala-library-2.13.1.jar:/tmp/sbt_244ca1d7/target/b650b9cd/akka-actor_2.13-2.6.3.jar:/tmp/sbt_244ca1d7/target/a8b341fe/config-1.4.0.jar:/tmp/sbt_244ca1d7/target/cecd75f8/scala-java8-compat_2.13-0.9.0.jar:/tmp/sbt_244ca1d7/target/3801c01e/akka-slf4j_2.13-2.6.3.jar:/tmp/sbt_244ca1d7/target/b5a4b6d1/slf4j-api-1.7.30.jar:/tmp/sbt_244ca1d7/target/7c4f3c47/logback-classic-1.2.3.jar:/tmp/sbt_244ca1d7/target/86434440/logback-core-1.2.3.jar:/tmp/sbt_244ca1d7/target/1c591dfd/scala-parser-combinators_2.13-1.1.2.jar:/tmp/sbt_244ca1d7/target/e70d360c/akka-diagnostics_2.13-1.1.12.jar:/tmp/sbt_244ca1d7/target/6c6c702c/commons-lang3-3.5.jar:/tmp/sbt_244ca1d7/target/7832979b/cinnamon-akka_2.13-2.13.1.jar:/tmp/sbt_244ca1d7/target/5336dd59/cinnamon-java-2.13.1.jar:/tmp/sbt_244ca1d7/target/40a2e2da/cinnamon-core-java-2.13.1.jar:/tmp/sbt_244ca1d7/target/a65b97ee/cinnamon-common-2.13.1.jar:/tmp/sbt_244ca1d7/target/8637290f/cinnamon-scala_2.13-2.13.1.jar:/tmp/sbt_244ca1d7/target/4dbf8530/cinnamon-core_2.13-2.13.1.jar:/tmp/sbt_244ca1d7/target/8fc82389/cinnamon-jvm-metrics-producer-2.13.1.jar:/tmp/sbt_244ca1d7/target/6c8821a8/cinnamon-prometheus-2.13.1.jar:/tmp/sbt_244ca1d7/target/8d4e28b6/simpleclient-0.8.0.jar:/tmp/sbt_244ca1d7/target/6eb75521/HdrHistogram-2.1.12.jar:/tmp/sbt_244ca1d7/target/7c0c78cc/cinnamon-prometheus-httpserver-2.13.1.jar:/tmp/sbt_244ca1d7/target/92f1e166/simpleclient_httpserver-0.8.0.jar:/tmp/sbt_244ca1d7/target/011ed6de/simpleclient_common-0.8.0.jar",
+  "configuration-warnings" : [],
+  "system-metrics" : {
+    "heap-init" : 264241152,
+    "heap-max" : 4196401152,
+    "heap-used" : 40357832,
+    "heap-committed" : 264241152,
+    "os-processors" : 16,
+    "mem-pool-0" : {
+      "name" : "CodeHeap 'non-nmethods'",
+      "type" : "Non-heap memory",
+      "init" : 2555904,
+      "max" : 7598080,
+      "used" : 2358528,
+      "committed" : 3080192
+    },
+    "mem-pool-1" : {
+      "name" : "Metaspace",
+      "type" : "Non-heap memory",
+      "init" : 0,
+      "max" : -1,
+      "used" : 34205152,
+      "committed" : 35516416
+    },
+    "mem-pool-2" : {
+      "name" : "CodeHeap 'profiled nmethods'",
+      "type" : "Non-heap memory",
+      "init" : 2555904,
+      "max" : 122028032,
+      "used" : 7489408,
+      "committed" : 7536640
+    },
+    "mem-pool-3" : {
+      "name" : "Compressed Class Space",
+      "type" : "Non-heap memory",
+      "init" : 0,
+      "max" : 1073741824,
+      "used" : 4151992,
+      "committed" : 4665344
+    },
+    "mem-pool-4" : {
+      "name" : "G1 Eden Space",
+      "type" : "Heap memory",
+      "init" : 27262976,
+      "max" : -1,
+      "used" : 31457280,
+      "committed" : 75497472
+    },
+    "mem-pool-5" : {
+      "name" : "G1 Old Gen",
+      "type" : "Heap memory",
+      "init" : 236978176,
+      "max" : 4196401152,
+      "used" : 3657672,
+      "committed" : 183500800
+    },
+    "mem-pool-6" : {
+      "name" : "G1 Survivor Space",
+      "type" : "Heap memory",
+      "init" : 0,
+      "max" : -1,
+      "used" : 5242880,
+      "committed" : 5242880
+    },
+    "mem-pool-7" : {
+      "name" : "CodeHeap 'non-profiled nmethods'",
+      "type" : "Non-heap memory",
+      "init" : 2555904,
+      "max" : 122032128,
+      "used" : 1557760,
+      "committed" : 2555904
+    }
+  },
+  "configuration" : {
+    "akka" : {
+        "actor" : {
+            "debug" : {
+                "lifecycle" : "on",
+                "unhandled" : "on"
+            }
+        },
+        "loggers" : [
+            "akka.event.slf4j.Slf4jLogger"
+        ],
+        "logging-filter" : "akka.event.slf4j.Slf4jLoggingFilter",
+        "loglevel" : "DEBUG",
+        "version" : "2.6.3"
+    },
+    "awt" : {
+        "toolkit" : "sun.awt.X11.XToolkit"
+    },
+    "cinnamon" : {
+        "akka" : {
+            "actors" : {
+                "/user/*" : {
+                    "report-by" : "class"
+                }
+            },
+            "dispatchers" : {
+                "basic-information" : {
+                    "names" : [
+                        "*"
+                    ]
+                },
+                "time-information" : {
+                    "names" : [
+                        "*"
+                    ]
+                }
+            }
+        },
+        "prometheus" : {
+            "exporters" : [
+                "http-server"
+            ],
+            "http-server" : {
+                "host" : "0.0.0.0",
+                "port" : 9001
+            }
+        }
+    },
+    "excluded-sensitive-paths" : [
+        "user.home",
+        "user.dir",
+        "user.name"
+    ],
+    "file" : {
+        "encoding" : "UTF-8",
+        "separator" : "/"
+    },
+    "java" : {
+        "awt" : {
+            "graphicsenv" : "sun.awt.X11GraphicsEnvironment",
+            "printerjob" : "sun.print.PSPrinterJob"
+        },
+        "class" : {
+            "path" : "/tmp/sbt_244ca1d7/job-1/target/9ad48cde/exercises_2.13-1.3.0.jar:/tmp/sbt_244ca1d7/target/062a1cdc/common_2.13-1.3.0.jar:/tmp/sbt_244ca1d7/target/1418c956/scala-library-2.13.1.jar:/tmp/sbt_244ca1d7/target/b650b9cd/akka-actor_2.13-2.6.3.jar:/tmp/sbt_244ca1d7/target/a8b341fe/config-1.4.0.jar:/tmp/sbt_244ca1d7/target/cecd75f8/scala-java8-compat_2.13-0.9.0.jar:/tmp/sbt_244ca1d7/target/3801c01e/akka-slf4j_2.13-2.6.3.jar:/tmp/sbt_244ca1d7/target/b5a4b6d1/slf4j-api-1.7.30.jar:/tmp/sbt_244ca1d7/target/7c4f3c47/logback-classic-1.2.3.jar:/tmp/sbt_244ca1d7/target/86434440/logback-core-1.2.3.jar:/tmp/sbt_244ca1d7/target/1c591dfd/scala-parser-combinators_2.13-1.1.2.jar:/tmp/sbt_244ca1d7/target/e70d360c/akka-diagnostics_2.13-1.1.12.jar:/tmp/sbt_244ca1d7/target/6c6c702c/commons-lang3-3.5.jar:/tmp/sbt_244ca1d7/target/7832979b/cinnamon-akka_2.13-2.13.1.jar:/tmp/sbt_244ca1d7/target/5336dd59/cinnamon-java-2.13.1.jar:/tmp/sbt_244ca1d7/target/40a2e2da/cinnamon-core-java-2.13.1.jar:/tmp/sbt_244ca1d7/target/a65b97ee/cinnamon-common-2.13.1.jar:/tmp/sbt_244ca1d7/target/8637290f/cinnamon-scala_2.13-2.13.1.jar:/tmp/sbt_244ca1d7/target/4dbf8530/cinnamon-core_2.13-2.13.1.jar:/tmp/sbt_244ca1d7/target/8fc82389/cinnamon-jvm-metrics-producer-2.13.1.jar:/tmp/sbt_244ca1d7/target/6c8821a8/cinnamon-prometheus-2.13.1.jar:/tmp/sbt_244ca1d7/target/8d4e28b6/simpleclient-0.8.0.jar:/tmp/sbt_244ca1d7/target/6eb75521/HdrHistogram-2.1.12.jar:/tmp/sbt_244ca1d7/target/7c0c78cc/cinnamon-prometheus-httpserver-2.13.1.jar:/tmp/sbt_244ca1d7/target/92f1e166/simpleclient_httpserver-0.8.0.jar:/tmp/sbt_244ca1d7/target/011ed6de/simpleclient_common-0.8.0.jar",
+            "version" : "55.0"
+        },
+        "home" : "/home/ecacho/.sdkman/candidates/java/11.0.7.hs-adpt",
+        "io" : {
+            "tmpdir" : "/tmp"
+        },
+        "library" : {
+            "path" : "/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"
+        },
+        "runtime" : {
+            "name" : "OpenJDK Runtime Environment",
+            "version" : "11.0.7+10"
+        },
+        "specification" : {
+            "name" : "Java Platform API Specification",
+            "vendor" : "Oracle Corporation",
+            "version" : "11"
+        },
+        "vendor" : {
+            "url" : {
+                "bug" : "https://github.com/AdoptOpenJDK/openjdk-support/issues"
+            },
+            "version" : "AdoptOpenJDK"
+        },
+        "version" : "11.0.7",
+        "vm" : {
+            "compressedOopsMode" : "Zero based",
+            "info" : "mixed mode",
+            "name" : "OpenJDK 64-Bit Server VM",
+            "specification" : {
+                "name" : "Java Virtual Machine Specification",
+                "vendor" : "Oracle Corporation",
+                "version" : "11"
+            },
+            "vendor" : "AdoptOpenJDK",
+            "version" : "11.0.7+10"
+        }
+    },
+    "jdk" : {
+        "debug" : "release"
+    },
+    "line" : {
+        "separator" : "\n"
+    },
+    "os" : {
+        "arch" : "amd64",
+        "name" : "Linux",
+        "version" : "5.6.12-300.fc32.x86_64"
+    },
+    "path" : {
+        "separator" : ":"
+    },
+    "sun" : {
+        "arch" : {
+            "data" : {
+                "model" : "64"
+            }
+        },
+        "boot" : {
+            "library" : {
+                "path" : "/home/ecacho/.sdkman/candidates/java/11.0.7.hs-adpt/lib"
+            }
+        },
+        "cpu" : {
+            "endian" : "little",
+            "isalist" : ""
+        },
+        "io" : {
+            "unicode" : {
+                "encoding" : "UnicodeLittle"
+            }
+        },
+        "java" : {
+            "command" : "com.lightbend.training.coffeehouse.CoffeeHouseApp",
+            "launcher" : "SUN_STANDARD"
+        },
+        "jnu" : {
+            "encoding" : "UTF-8"
+        },
+        "management" : {
+            "compiler" : "HotSpot 64-Bit Tiered Compilers"
+        },
+        "os" : {
+            "patch" : {
+                "level" : "unknown"
+            }
+        }
+    },
+    "user" : {
+        "country" : "US",
+        "language" : "en",
+        "timezone" : "America/Lima"
+    }
+}
+}
+

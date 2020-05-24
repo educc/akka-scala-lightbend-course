@@ -4,9 +4,7 @@
 
 package com.lightbend.training.coffeehouse
 
-import akka.actor.Actor
-import akka.event.Logging.Info
-import akka.testkit.{EventFilter, TestActorRef, TestProbe}
+import akka.testkit.TestProbe
 
 class CoffeeHouseAppSpec extends BaseAkkaSpec {
 
@@ -31,23 +29,16 @@ class CoffeeHouseAppSpec extends BaseAkkaSpec {
       new CoffeeHouseApp(system)
       TestProbe().expectActor("/user/coffee-house")
     }
-    "result in sending a message to CoffeeHouse" in {
-      val coffeeHouse = TestProbe()
+  }
+
+  "Calling createGuest" should {
+    "result in sending CreateGuest to CoffeeHouse count number of times" in {
+      val probe = TestProbe()
       new CoffeeHouseApp(system) {
-        override def createCoffeeHouse() = coffeeHouse.ref
+        createGuest(2, Coffee.Akkaccino, Int.MaxValue)
+        override def createCoffeeHouse() = probe.ref
       }
-      coffeeHouse.expectMsgType[Any]
-    }
-    "result in logging CoffeeHouse's response at info" in {
-      EventFilter.custom({ case Info(source, _, "response") => source contains "$" }, 1) intercept {
-        new CoffeeHouseApp(system) {
-          override def createCoffeeHouse() = TestActorRef(new Actor {
-            override def receive = {
-              case _ => sender() ! "response"
-            }
-          })
-        }
-      }
+      probe.receiveN(2) shouldEqual List.fill(2)(CoffeeHouse.CreateGuest(Coffee.Akkaccino))
     }
   }
 }

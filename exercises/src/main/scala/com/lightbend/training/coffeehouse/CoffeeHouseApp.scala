@@ -40,13 +40,6 @@ class CoffeeHouseApp(system: ActorSystem) extends Terminal {
 
   private val coffeeHouse = createCoffeeHouse()
 
-  system.actorOf(Props(new Actor {
-    coffeeHouse ! "Brew Coffee" // sender is implicit
-
-    override def receive: Receive = {
-      case msg => log.info(msg.toString)
-    }
-  }))
 
   def run(): Unit = {
     log.warning(f"{} running%nEnter "
@@ -76,8 +69,11 @@ class CoffeeHouseApp(system: ActorSystem) extends Terminal {
         commandLoop()
     }
 
-  protected def createGuest(count: Int, coffee: Coffee, caffeineLimit: Int): Unit =
-    ()
+  protected def createGuest(count: Int, coffee: Coffee, caffeineLimit: Int): Unit = {
+    (1 to count).foreach {
+      _ => coffeeHouse ! CoffeeHouse.CreateGuest(coffee)
+    }
+  }
 
   protected def status(): Unit =
     ()
