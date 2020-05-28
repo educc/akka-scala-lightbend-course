@@ -8,14 +8,14 @@ object Waiter {
   case class ServeCoffee(coffee: Coffee)
   case class CoffeeServed(coffee: Coffee)
 
-  def props(barista: ActorRef): Props = Props(new Waiter(barista))
+  def props(coffeeHouse: ActorRef): Props = Props(new Waiter(coffeeHouse))
 }
 
-class Waiter(barista: ActorRef)
+class Waiter(coffeeHouse: ActorRef)
   extends Actor with ActorLogging{
   override def receive: Receive = {
     case ServeCoffee(coffee) =>
-      barista ! Barista.PrepareCoffee(coffee, sender())
+      coffeeHouse ! CoffeeHouse.ApproveCoffee(coffee, sender())
 
     case Barista.CoffeePrepared(coffee, guest) =>
       guest ! CoffeeServed(coffee)

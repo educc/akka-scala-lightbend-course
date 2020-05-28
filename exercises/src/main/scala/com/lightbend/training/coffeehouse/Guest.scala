@@ -31,4 +31,9 @@ class Guest(waiter: ActorRef, favoriteCoffee: Coffee, finishCoffeeDuration: Fini
   private def orderCoffee() = {
     waiter ! Waiter.ServeCoffee(favoriteCoffee)
   }
+
+  override def postStop(): Unit = {
+    log.info("Goodbye")
+    super.postStop()
+  }
 }
