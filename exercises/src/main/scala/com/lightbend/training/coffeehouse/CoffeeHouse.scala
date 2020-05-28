@@ -1,61 +1,62 @@
+/**
+ * Copyright © 2014 - 2020 Lightbend, Inc. All rights reserved. [http://www.lightbend.com]
+ */
+
 package com.lightbend.training.coffeehouse
 
-import java.util.concurrent.TimeUnit
-
-import akka.actor.{Actor, ActorLogging, ActorRef, Props, Terminated}
-import com.lightbend.training.coffeehouse.CoffeeHouse.{ApproveCoffee, CreateGuest}
-
-import scala.concurrent.duration._
+import akka.actor.{ Actor, ActorLogging, ActorRef, Props, Terminated }
+import scala.concurrent.duration.{ Duration, MILLISECONDS => Millis }
 
 object CoffeeHouse {
-  case class CreateGuest(favoriteCoffee: Coffee)
+
+  case class CreateGuest(favoriteCoffee: Coffee, caffeineLimit: Int)
   case class ApproveCoffee(coffee: Coffee, guest: ActorRef)
 
-  def props(caffeineLimit: Int): Props = Props(new CoffeeHouse(caffeineLimit))
+  def props(caffeineLimit: Int): Props =
+    Props(new CoffeeHouse(caffeineLimit))
 }
 
 class CoffeeHouse(caffeineLimit: Int) extends Actor with ActorLogging {
 
+  import CoffeeHouse._
+
+  private val baristaPrepareCoffeeDuration =
+    Duration(context.system.settings.config.getDuration("coffee-house.barista.prepare-coffee-duration", Millis), Millis)
+  private val guestFinishCoffeeDuration =
+    Duration(context.system.settings.config.getDuration("coffee-house.guest.finish-coffee-duration", Millis), Millis)
+
+  private val barista = createBarista()
+  private val waiter = createWaiter()
+
+  private var guestBook = Map.empty[ActorRef, Int] withDefaultValue 0
+
   log.debug("CoffeeHouse Open")
 
-  private var guestBook: Map[ActorRef, Int] = Map.empty.withDefaultValue(0)
-
-  private val finishCoffeeDuration: FiniteDuration =
-    context.system.settings.config.getDuration("coffee-house.guest.finish-coffee-duration", TimeUnit.MILLISECONDS).millis
-  private val prepareCoffeeDuration: FiniteDuration =
-    context.system.settings.config.getDuration("coffee-house.barista.prepare-coffee-duration", TimeUnit.MILLISECONDS).millis
-
-
-  private val barista: ActorRef = createBarista()
-  private val waiter: ActorRef = createWaiter()
-
-  protected def createBarista(): ActorRef = {
-    context.actorOf(Barista.props(prepareCoffeeDuration), "barista")
-  }
-
-  protected def createGuest(coffee: Coffee): ActorRef = {
-    context.actorOf(Guest.props(waiter, coffee, finishCoffeeDuration  ))
-  }
-  protected def createWaiter(): ActorRef = context.actorOf(Waiter.props(barista), "waiter")
-
   override def receive: Receive = {
-    case CreateGuest(favoriteCoffee) =>
-      val guest = createGuest(favoriteCoffee)
+    case CreateGuest(favoriteCoffee, caffeineLimit) =>
+      val guest: ActorRef = createGuest(favoriteCoffee, caffeineLimit)
       guestBook += guest -> 0
-      log.info(s"Guest $guest added to guest book")
+      log.info(s"Guest $guest added to guest book.")
       context.watch(guest)
-
     case ApproveCoffee(coffee, guest) if guestBook(guest) < caffeineLimit =>
-      guestBook += guest -> (guestBook(guest)+1)
+      guestBook += guest -> (guestBook(guest) + 1)
       log.info(s"Guest $guest caffeine count incremented.")
-      barista.forward(Barista.PrepareCoffee(coffee, guest))
-
+      barista forward Barista.PrepareCoffee(coffee, guest)
     case ApproveCoffee(coffee, guest) =>
-      log.info(s"Sorry $guest, but you have reached your limit.")
+      log.info(s"Sorry, $guest, but you have reached your limit.")
       context.stop(guest)
-
     case Terminated(guest) =>
       log.info(s"Thanks, $guest, for being our guest!")
       guestBook -= guest
+
   }
+
+  protected def createBarista(): ActorRef =
+    context.actorOf(Barista.props(baristaPrepareCoffeeDuration), "barista")
+
+  protected def createWaiter(): ActorRef =
+    context.actorOf(Waiter.props(self), "waiter")
+
+  protected def createGuest(favoriteCoffee: Coffee, caffeineLimit: Int): ActorRef =
+    context.actorOf(Guest.props(waiter, favoriteCoffee, guestFinishCoffeeDuration, caffeineLimit))
 }

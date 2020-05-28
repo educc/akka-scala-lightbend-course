@@ -4,9 +4,8 @@
 
 package com.lightbend.training.coffeehouse
 
-import akka.actor.{Actor, ActorRef, ActorSystem, Props}
+import akka.actor.{ ActorRef, ActorSystem }
 import akka.event.Logging
-
 import scala.annotation.tailrec
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
@@ -39,8 +38,6 @@ class CoffeeHouseApp(system: ActorSystem) extends Terminal {
   private val log = Logging(system, getClass.getName)
 
   private val coffeeHouse = createCoffeeHouse()
-  private val caffeineLimit = system.settings.config.getInt("coffee-house.caffeine-limit")
-
 
   def run(): Unit = {
     log.warning(f"{} running%nEnter "
@@ -51,30 +48,37 @@ class CoffeeHouseApp(system: ActorSystem) extends Terminal {
     Await.ready(system.whenTerminated, Duration.Inf)
   }
 
-  protected def createCoffeeHouse(): ActorRef =
+  protected def createCoffeeHouse(): ActorRef = {
+    val caffeineLimit = system.settings.config.getInt("coffee-house.caffeine-limit")
     system.actorOf(CoffeeHouse.props(caffeineLimit), "coffee-house")
+  }
 
   @tailrec
-  private def commandLoop(): Unit =
-    Command(StdIn.readLine()) match {
-      case Command.Guest(count, coffee, caffeineLimit) =>
-        createGuest(count, coffee, caffeineLimit)
-        commandLoop()
-      case Command.Status =>
-        status()
-        commandLoop()
-      case Command.Quit =>
-        system.terminate()
-      case Command.Unknown(command) =>
-        log.warning("Unknown command {}!", command)
-        commandLoop()
-    }
+  private def commandLoop(): Unit = {
+    val commandString = StdIn.readLine()
 
-  protected def createGuest(count: Int, coffee: Coffee, caffeineLimit: Int): Unit = {
-    (1 to count).foreach {
-      _ => coffeeHouse ! CoffeeHouse.CreateGuest(coffee)
+    if(commandString == null) {
+      system.terminate()
+    } else {
+      Command(commandString) match {
+        case Command.Guest(count, coffee, caffeineLimit) =>
+          createGuest(count, coffee, caffeineLimit)
+          commandLoop()
+        case Command.Status =>
+          status()
+          commandLoop()
+        case Command.Quit =>
+          system.terminate()
+        case Command.Unknown(command) =>
+          log.warning("Unknown command {}!", command)
+          commandLoop()
+      }
     }
   }
+
+  protected def createGuest(count: Int, coffee: Coffee, caffeineLimit: Int): Unit =
+    for (_ <- 1 to count)
+      coffeeHouse ! CoffeeHouse.CreateGuest(coffee, caffeineLimit)
 
   protected def status(): Unit =
     ()
