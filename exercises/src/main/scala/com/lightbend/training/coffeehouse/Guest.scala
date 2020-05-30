@@ -27,10 +27,15 @@ class Guest(waiter: ActorRef, favoriteCoffee: Coffee, finishCoffeeDuration: Fini
   orderFavoriteCoffee()
 
   override def receive: Receive = {
-    case Waiter.CoffeeServed(coffee) =>
+    case Waiter.CoffeeServed(`favoriteCoffee`) =>
       coffeeCount += 1
-      log.info("Enjoying my {} yummy {}!", coffeeCount, coffee)
+      log.info("Enjoying my {} yummy {}!", coffeeCount, favoriteCoffee)
       timers.startSingleTimer("coffee-finished", CoffeeFinished, finishCoffeeDuration)
+
+    case Waiter.CoffeeServed(otherCoffee) =>
+      log.info(s"Expected a $favoriteCoffee, but got a $otherCoffee")
+      waiter ! Waiter.Complaint(favoriteCoffee)
+
     case CoffeeFinished if coffeeCount > caffeineLimit =>
       throw CaffeineException
     case CoffeeFinished =>

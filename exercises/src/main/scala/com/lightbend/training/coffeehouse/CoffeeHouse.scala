@@ -4,8 +4,9 @@
 
 package com.lightbend.training.coffeehouse
 
-import akka.actor.{ Actor, ActorLogging, ActorRef, Props, Terminated }
-import scala.concurrent.duration.{ Duration, MILLISECONDS => Millis }
+import akka.actor.{Actor, ActorLogging, ActorRef, OneForOneStrategy, Props, SupervisorStrategy, Terminated}
+
+import scala.concurrent.duration.{Duration, MILLISECONDS => Millis}
 
 object CoffeeHouse {
 
@@ -30,7 +31,22 @@ class CoffeeHouse(caffeineLimit: Int) extends Actor with ActorLogging {
 
   private var guestBook = Map.empty[ActorRef, Int] withDefaultValue 0
 
+  private val baristaAccuracy = context.system.settings.config.getInt("coffee-house.barista.accuracy")
+  private val waiterMaxComplaintCount = context.system.settings.config.getInt("coffee-house.waiter.max-complaint-count")
+
+
   log.debug("CoffeeHouse Open")
+
+
+  override def supervisorStrategy: SupervisorStrategy = {
+    val decider: SupervisorStrategy.Decider = {
+      case Guest.CaffeineException => SupervisorStrategy.Stop
+      case Waiter.FrustratedException(coffee, guest) =>
+        barista.forward(Barista.PrepareCoffee(coffee, guest))
+        SupervisorStrategy.Restart
+    }
+    OneForOneStrategy()(decider.orElse(super.supervisorStrategy.decider))
+  }
 
   override def receive: Receive = {
     case CreateGuest(favoriteCoffee, caffeineLimit) =>
@@ -52,10 +68,10 @@ class CoffeeHouse(caffeineLimit: Int) extends Actor with ActorLogging {
   }
 
   protected def createBarista(): ActorRef =
-    context.actorOf(Barista.props(baristaPrepareCoffeeDuration), "barista")
+    context.actorOf(Barista.props(baristaPrepareCoffeeDuration, baristaAccuracy), "barista")
 
   protected def createWaiter(): ActorRef =
-    context.actorOf(Waiter.props(self), "waiter")
+    context.actorOf(Waiter.props(self, barista, waiterMaxComplaintCount), "waiter")
 
   protected def createGuest(favoriteCoffee: Coffee, caffeineLimit: Int): ActorRef =
     context.actorOf(Guest.props(waiter, favoriteCoffee, guestFinishCoffeeDuration, caffeineLimit))
