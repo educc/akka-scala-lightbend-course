@@ -4,8 +4,10 @@
 
 package com.lightbend.training.coffeehouse
 
-import akka.actor.{ Actor, ActorLogging, ActorRef, OneForOneStrategy, Props, SupervisorStrategy, Terminated }
-import scala.concurrent.duration.{ Duration, MILLISECONDS => Millis }
+import akka.actor.{Actor, ActorLogging, ActorRef, OneForOneStrategy, Props, SupervisorStrategy, Terminated}
+import akka.routing.FromConfig
+
+import scala.concurrent.duration.{Duration, MILLISECONDS => Millis}
 
 object CoffeeHouse {
 
@@ -65,7 +67,8 @@ class CoffeeHouse(caffeineLimit: Int) extends Actor with ActorLogging {
   }
 
   protected def createBarista(): ActorRef =
-    context.actorOf(Barista.props(baristaPrepareCoffeeDuration, baristaAccuracy), "barista")
+    context.actorOf(
+      FromConfig.props(Barista.props(baristaPrepareCoffeeDuration, baristaAccuracy)), "barista")
 
   protected def createWaiter(): ActorRef =
     context.actorOf(Waiter.props(self, barista, waiterMaxComplaintCount), "waiter")
