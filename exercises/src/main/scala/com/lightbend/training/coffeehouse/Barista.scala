@@ -4,8 +4,7 @@
 
 package com.lightbend.training.coffeehouse
 
-import akka.actor.{Actor, ActorRef, Props}
-
+import akka.actor.{ Actor, ActorRef, Props }
 import scala.concurrent.duration.FiniteDuration
 import scala.util.Random
 
@@ -28,10 +27,9 @@ class Barista(prepareCoffeeDuration: FiniteDuration, accuracy: Int) extends Acto
       sender() ! CoffeePrepared(pickCoffee(coffee), guest)
   }
 
-  private def pickCoffee(coffee: Coffee): Coffee = {
+  private def pickCoffee(coffee: Coffee): Coffee =
     if (Random.nextInt(100) < accuracy)
       coffee
     else
       Coffee.anyOther(coffee)
-  }
 }

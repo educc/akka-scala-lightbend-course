@@ -31,12 +31,10 @@ class Guest(waiter: ActorRef, favoriteCoffee: Coffee, finishCoffeeDuration: Fini
       coffeeCount += 1
       log.info("Enjoying my {} yummy {}!", coffeeCount, favoriteCoffee)
       timers.startSingleTimer("coffee-finished", CoffeeFinished, finishCoffeeDuration)
-
-    case Waiter.CoffeeServed(otherCoffee) =>
-      log.info(s"Expected a $favoriteCoffee, but got a $otherCoffee")
+    case Waiter.CoffeeServed(coffee) =>
+      log.info("Expected a {}, but got a {}!", favoriteCoffee, coffee)
       waiter ! Waiter.Complaint(favoriteCoffee)
-
-    case CoffeeFinished if coffeeCount > caffeineLimit =>
+    case CoffeeFinished if coffeeCount >= caffeineLimit =>
       throw CaffeineException
     case CoffeeFinished =>
       orderFavoriteCoffee()
