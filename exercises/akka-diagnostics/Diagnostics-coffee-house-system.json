@@ -1,13 +1,31 @@
 {
-  "start-time" : "2020-05-31T12:03:26.914",
+  "start-time" : "2020-05-31T15:18:06.190",
   "akka-version" : "2.6.3",
   "akka-diagnostics-version" : "1.1.12",
-  "classpath" : "/tmp/sbt_bc734112/job-1/target/d7ab48ae/exercises_2.13-1.3.0.jar:/tmp/sbt_bc734112/target/283f31bf/common_2.13-1.3.0.jar:/tmp/sbt_bc734112/target/1418c956/scala-library-2.13.1.jar:/tmp/sbt_bc734112/target/b650b9cd/akka-actor_2.13-2.6.3.jar:/tmp/sbt_bc734112/target/a8b341fe/config-1.4.0.jar:/tmp/sbt_bc734112/target/cecd75f8/scala-java8-compat_2.13-0.9.0.jar:/tmp/sbt_bc734112/target/3801c01e/akka-slf4j_2.13-2.6.3.jar:/tmp/sbt_bc734112/target/b5a4b6d1/slf4j-api-1.7.30.jar:/tmp/sbt_bc734112/target/7c4f3c47/logback-classic-1.2.3.jar:/tmp/sbt_bc734112/target/86434440/logback-core-1.2.3.jar:/tmp/sbt_bc734112/target/1c591dfd/scala-parser-combinators_2.13-1.1.2.jar:/tmp/sbt_bc734112/target/e70d360c/akka-diagnostics_2.13-1.1.12.jar:/tmp/sbt_bc734112/target/6c6c702c/commons-lang3-3.5.jar:/tmp/sbt_bc734112/target/7832979b/cinnamon-akka_2.13-2.13.1.jar:/tmp/sbt_bc734112/target/5336dd59/cinnamon-java-2.13.1.jar:/tmp/sbt_bc734112/target/40a2e2da/cinnamon-core-java-2.13.1.jar:/tmp/sbt_bc734112/target/a65b97ee/cinnamon-common-2.13.1.jar:/tmp/sbt_bc734112/target/8637290f/cinnamon-scala_2.13-2.13.1.jar:/tmp/sbt_bc734112/target/4dbf8530/cinnamon-core_2.13-2.13.1.jar:/tmp/sbt_bc734112/target/8fc82389/cinnamon-jvm-metrics-producer-2.13.1.jar:/tmp/sbt_bc734112/target/6c8821a8/cinnamon-prometheus-2.13.1.jar:/tmp/sbt_bc734112/target/8d4e28b6/simpleclient-0.8.0.jar:/tmp/sbt_bc734112/target/6eb75521/HdrHistogram-2.1.12.jar:/tmp/sbt_bc734112/target/7c0c78cc/cinnamon-prometheus-httpserver-2.13.1.jar:/tmp/sbt_bc734112/target/92f1e166/simpleclient_httpserver-0.8.0.jar:/tmp/sbt_bc734112/target/011ed6de/simpleclient_common-0.8.0.jar",
-  "configuration-warnings" : [],
+  "classpath" : "/tmp/sbt_f09c9fc7/job-1/target/a378a27e/exercises_2.13-1.3.0.jar:/tmp/sbt_f09c9fc7/target/283f31bf/common_2.13-1.3.0.jar:/tmp/sbt_f09c9fc7/target/1418c956/scala-library-2.13.1.jar:/tmp/sbt_f09c9fc7/target/b650b9cd/akka-actor_2.13-2.6.3.jar:/tmp/sbt_f09c9fc7/target/a8b341fe/config-1.4.0.jar:/tmp/sbt_f09c9fc7/target/cecd75f8/scala-java8-compat_2.13-0.9.0.jar:/tmp/sbt_f09c9fc7/target/3801c01e/akka-slf4j_2.13-2.6.3.jar:/tmp/sbt_f09c9fc7/target/b5a4b6d1/slf4j-api-1.7.30.jar:/tmp/sbt_f09c9fc7/target/7c4f3c47/logback-classic-1.2.3.jar:/tmp/sbt_f09c9fc7/target/86434440/logback-core-1.2.3.jar:/tmp/sbt_f09c9fc7/target/1c591dfd/scala-parser-combinators_2.13-1.1.2.jar:/tmp/sbt_f09c9fc7/target/e70d360c/akka-diagnostics_2.13-1.1.12.jar:/tmp/sbt_f09c9fc7/target/6c6c702c/commons-lang3-3.5.jar:/tmp/sbt_f09c9fc7/target/7832979b/cinnamon-akka_2.13-2.13.1.jar:/tmp/sbt_f09c9fc7/target/5336dd59/cinnamon-java-2.13.1.jar:/tmp/sbt_f09c9fc7/target/40a2e2da/cinnamon-core-java-2.13.1.jar:/tmp/sbt_f09c9fc7/target/a65b97ee/cinnamon-common-2.13.1.jar:/tmp/sbt_f09c9fc7/target/8637290f/cinnamon-scala_2.13-2.13.1.jar:/tmp/sbt_f09c9fc7/target/4dbf8530/cinnamon-core_2.13-2.13.1.jar:/tmp/sbt_f09c9fc7/target/8fc82389/cinnamon-jvm-metrics-producer-2.13.1.jar:/tmp/sbt_f09c9fc7/target/6c8821a8/cinnamon-prometheus-2.13.1.jar:/tmp/sbt_f09c9fc7/target/8d4e28b6/simpleclient-0.8.0.jar:/tmp/sbt_f09c9fc7/target/6eb75521/HdrHistogram-2.1.12.jar:/tmp/sbt_f09c9fc7/target/7c0c78cc/cinnamon-prometheus-httpserver-2.13.1.jar:/tmp/sbt_f09c9fc7/target/92f1e166/simpleclient_httpserver-0.8.0.jar:/tmp/sbt_f09c9fc7/target/011ed6de/simpleclient_common-0.8.0.jar",
+  "configuration-warnings" : [
+    {
+      "checker-key" : "typo",
+      "message" : "akka.actor.deployment.default-dispatcher.fork-join-executor.parallelism-factor is not an Akka configuration setting. Did you mean one of 'akka.actor.internal-dispatcher.fork-join-executor.parallelism-factor', 'akka.actor.default-dispatcher.fork-join-executor.parallelism-factor', 'akka.actor.default-dispatcher.affinity-pool-executor.parallelism-factor'? Is it a typo or is it placed in the wrong section? Application specific properties should be placed outside the 'akka' config tree.",
+      "properties" : "akka.actor.deployment.default-dispatcher.fork-join-executor.parallelism-factor",
+      "defaults" : ""
+    },
+    {
+      "checker-key" : "typo",
+      "message" : "akka.actor.deployment.default-dispatcher.fork-join-executor.parallelism-min is not an Akka configuration setting. Did you mean one of 'akka.actor.internal-dispatcher.fork-join-executor.parallelism-min', 'akka.actor.default-dispatcher.fork-join-executor.parallelism-min', 'akka.actor.default-dispatcher.affinity-pool-executor.parallelism-min'? Is it a typo or is it placed in the wrong section? Application specific properties should be placed outside the 'akka' config tree.",
+      "properties" : "akka.actor.deployment.default-dispatcher.fork-join-executor.parallelism-min",
+      "defaults" : ""
+    },
+    {
+      "checker-key" : "typo",
+      "message" : "akka.actor.deployment.default-dispatcher.fork-join-executor.parallelism-max is not an Akka configuration setting. Did you mean one of 'akka.actor.internal-dispatcher.fork-join-executor.parallelism-max', 'akka.actor.default-dispatcher.fork-join-executor.parallelism-max', 'akka.actor.default-dispatcher.affinity-pool-executor.parallelism-max'? Is it a typo or is it placed in the wrong section? Application specific properties should be placed outside the 'akka' config tree.",
+      "properties" : "akka.actor.deployment.default-dispatcher.fork-join-executor.parallelism-max",
+      "defaults" : ""
+    }],
   "system-metrics" : {
     "heap-init" : 264241152,
     "heap-max" : 4196401152,
-    "heap-used" : 42907744,
+    "heap-used" : 43726816,
     "heap-committed" : 264241152,
     "os-processors" : 16,
     "mem-pool-0" : {
@@ -15,48 +33,48 @@
       "type" : "Non-heap memory",
       "init" : 2555904,
       "max" : 7598080,
-      "used" : 1784320,
-      "committed" : 3080192
+      "used" : 2360960,
+      "committed" : 3014656
     },
     "mem-pool-1" : {
       "name" : "Metaspace",
       "type" : "Non-heap memory",
       "init" : 0,
       "max" : -1,
-      "used" : 34438128,
-      "committed" : 35647488
+      "used" : 34730504,
+      "committed" : 35913728
     },
     "mem-pool-2" : {
       "name" : "CodeHeap 'profiled nmethods'",
       "type" : "Non-heap memory",
       "init" : 2555904,
       "max" : 122028032,
-      "used" : 7683584,
-      "committed" : 7733248
+      "used" : 7796224,
+      "committed" : 7798784
     },
     "mem-pool-3" : {
       "name" : "Compressed Class Space",
       "type" : "Non-heap memory",
       "init" : 0,
       "max" : 1073741824,
-      "used" : 4194520,
-      "committed" : 4796416
+      "used" : 4213264,
+      "committed" : 4718592
     },
     "mem-pool-4" : {
       "name" : "G1 Eden Space",
       "type" : "Heap memory",
       "init" : 27262976,
       "max" : -1,
-      "used" : 34603008,
-      "committed" : 73400320
+      "used" : 35651584,
+      "committed" : 75497472
     },
     "mem-pool-5" : {
       "name" : "G1 Old Gen",
       "type" : "Heap memory",
       "init" : 236978176,
       "max" : 4196401152,
-      "used" : 3061856,
-      "committed" : 185597952
+      "used" : 2832352,
+      "committed" : 183500800
     },
     "mem-pool-6" : {
       "name" : "G1 Survivor Space",
@@ -71,7 +89,7 @@
       "type" : "Non-heap memory",
       "init" : 2555904,
       "max" : 122032128,
-      "used" : 1527552,
+      "used" : 1572224,
       "committed" : 2555904
     }
   },
@@ -84,11 +102,15 @@
             },
             "deployment" : {
                 "/coffee-house/barista" : {
-                    "resizer" : {
-                        "lower-bound" : 1,
-                        "upper-bound" : 16
-                    },
+                    "nr-of-instances" : 4,
                     "router" : "round-robin-pool"
+                },
+                "default-dispatcher" : {
+                    "fork-join-executor" : {
+                        "parallelism-factor" : 2,
+                        "parallelism-max" : 4,
+                        "parallelism-min" : 4
+                    }
                 }
             }
         },
@@ -160,7 +182,7 @@
             "printerjob" : "sun.print.PSPrinterJob"
         },
         "class" : {
-            "path" : "/tmp/sbt_bc734112/job-1/target/d7ab48ae/exercises_2.13-1.3.0.jar:/tmp/sbt_bc734112/target/283f31bf/common_2.13-1.3.0.jar:/tmp/sbt_bc734112/target/1418c956/scala-library-2.13.1.jar:/tmp/sbt_bc734112/target/b650b9cd/akka-actor_2.13-2.6.3.jar:/tmp/sbt_bc734112/target/a8b341fe/config-1.4.0.jar:/tmp/sbt_bc734112/target/cecd75f8/scala-java8-compat_2.13-0.9.0.jar:/tmp/sbt_bc734112/target/3801c01e/akka-slf4j_2.13-2.6.3.jar:/tmp/sbt_bc734112/target/b5a4b6d1/slf4j-api-1.7.30.jar:/tmp/sbt_bc734112/target/7c4f3c47/logback-classic-1.2.3.jar:/tmp/sbt_bc734112/target/86434440/logback-core-1.2.3.jar:/tmp/sbt_bc734112/target/1c591dfd/scala-parser-combinators_2.13-1.1.2.jar:/tmp/sbt_bc734112/target/e70d360c/akka-diagnostics_2.13-1.1.12.jar:/tmp/sbt_bc734112/target/6c6c702c/commons-lang3-3.5.jar:/tmp/sbt_bc734112/target/7832979b/cinnamon-akka_2.13-2.13.1.jar:/tmp/sbt_bc734112/target/5336dd59/cinnamon-java-2.13.1.jar:/tmp/sbt_bc734112/target/40a2e2da/cinnamon-core-java-2.13.1.jar:/tmp/sbt_bc734112/target/a65b97ee/cinnamon-common-2.13.1.jar:/tmp/sbt_bc734112/target/8637290f/cinnamon-scala_2.13-2.13.1.jar:/tmp/sbt_bc734112/target/4dbf8530/cinnamon-core_2.13-2.13.1.jar:/tmp/sbt_bc734112/target/8fc82389/cinnamon-jvm-metrics-producer-2.13.1.jar:/tmp/sbt_bc734112/target/6c8821a8/cinnamon-prometheus-2.13.1.jar:/tmp/sbt_bc734112/target/8d4e28b6/simpleclient-0.8.0.jar:/tmp/sbt_bc734112/target/6eb75521/HdrHistogram-2.1.12.jar:/tmp/sbt_bc734112/target/7c0c78cc/cinnamon-prometheus-httpserver-2.13.1.jar:/tmp/sbt_bc734112/target/92f1e166/simpleclient_httpserver-0.8.0.jar:/tmp/sbt_bc734112/target/011ed6de/simpleclient_common-0.8.0.jar",
+            "path" : "/tmp/sbt_f09c9fc7/job-1/target/a378a27e/exercises_2.13-1.3.0.jar:/tmp/sbt_f09c9fc7/target/283f31bf/common_2.13-1.3.0.jar:/tmp/sbt_f09c9fc7/target/1418c956/scala-library-2.13.1.jar:/tmp/sbt_f09c9fc7/target/b650b9cd/akka-actor_2.13-2.6.3.jar:/tmp/sbt_f09c9fc7/target/a8b341fe/config-1.4.0.jar:/tmp/sbt_f09c9fc7/target/cecd75f8/scala-java8-compat_2.13-0.9.0.jar:/tmp/sbt_f09c9fc7/target/3801c01e/akka-slf4j_2.13-2.6.3.jar:/tmp/sbt_f09c9fc7/target/b5a4b6d1/slf4j-api-1.7.30.jar:/tmp/sbt_f09c9fc7/target/7c4f3c47/logback-classic-1.2.3.jar:/tmp/sbt_f09c9fc7/target/86434440/logback-core-1.2.3.jar:/tmp/sbt_f09c9fc7/target/1c591dfd/scala-parser-combinators_2.13-1.1.2.jar:/tmp/sbt_f09c9fc7/target/e70d360c/akka-diagnostics_2.13-1.1.12.jar:/tmp/sbt_f09c9fc7/target/6c6c702c/commons-lang3-3.5.jar:/tmp/sbt_f09c9fc7/target/7832979b/cinnamon-akka_2.13-2.13.1.jar:/tmp/sbt_f09c9fc7/target/5336dd59/cinnamon-java-2.13.1.jar:/tmp/sbt_f09c9fc7/target/40a2e2da/cinnamon-core-java-2.13.1.jar:/tmp/sbt_f09c9fc7/target/a65b97ee/cinnamon-common-2.13.1.jar:/tmp/sbt_f09c9fc7/target/8637290f/cinnamon-scala_2.13-2.13.1.jar:/tmp/sbt_f09c9fc7/target/4dbf8530/cinnamon-core_2.13-2.13.1.jar:/tmp/sbt_f09c9fc7/target/8fc82389/cinnamon-jvm-metrics-producer-2.13.1.jar:/tmp/sbt_f09c9fc7/target/6c8821a8/cinnamon-prometheus-2.13.1.jar:/tmp/sbt_f09c9fc7/target/8d4e28b6/simpleclient-0.8.0.jar:/tmp/sbt_f09c9fc7/target/6eb75521/HdrHistogram-2.1.12.jar:/tmp/sbt_f09c9fc7/target/7c0c78cc/cinnamon-prometheus-httpserver-2.13.1.jar:/tmp/sbt_f09c9fc7/target/92f1e166/simpleclient_httpserver-0.8.0.jar:/tmp/sbt_f09c9fc7/target/011ed6de/simpleclient_common-0.8.0.jar",
             "version" : "55.0"
         },
         "home" : "/home/ecacho/.sdkman/candidates/java/11.0.7.hs-adpt",
